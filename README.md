@@ -1,18 +1,40 @@
-## Getting Started
+Nombre: Pastelería Lulu’s
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Integrantes:
 
-## Folder Structure
+Barerardo José Márquez Velázquez – 192479 ROL: Diseño – Arrays
+Paula Andrea Echavez Vargas – 192587 ROL: Diseño – Entrada y Salida de Datos
+Keiner Josué Barbosa Calderón – 192502 ROL: Diseño – Lógica
+María Laura Contreras Trillos – 192521 ROL: Diseño – Métodos
 
-The workspace contains two folders by default, where:
+Descripción del problema y solución propuesta.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+El emprendimiento Pastelería lulu's surgió ante la necesidad de organizar eficientemente los
+pedidos personalizados de una pastelería artesanal, así como facilitar la gestión de productos,
+clientes y entregas.
+Actualmente, el proceso de pedidos es manual y genera errores frecuentes, pérdida de información
+o retrasos.
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+Solución: se desarrolló un programa que permite:
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+- Registrar productos.
+- Tomar pedidos.
+- Hacer las entregas ubicación.
+- Llevar control de inventario.
 
-## Dependency Management
+Explicación de clases y métodos principales.
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Intruciones básicas para ejecutar el código.
+
+Instrucciones para Ejecutar el Programa
+
+1. Requisitos Previos
+JDK 17 o superior
+IDE: IntelliJ IDEA, Eclipse o NetBeans
+2. Clonar el Repositorio
+git clone https://github.com/usuario/sweetdelights-java.git
+cd sweetdelights-java
+3. Compilar y Ejecutar
+Abre el proyecto en tu IDE.
+Compila los archivos .java.
+Ejecuta la clase Main.java (contenida en el paquete app).

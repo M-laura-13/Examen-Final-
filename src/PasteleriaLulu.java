@@ -1,9 +1,8 @@
-import java.util.Scanner;
-
-// Clase Producto.java
+import java.util.*;
 class Producto {
-    private String nombre;
-    private double precio;
+    protected String nombre;
+    protected double precio;
+    protected int cantidadMaxima = 25;
 
     public Producto(String nombre, double precio) {
         this.nombre = nombre;
@@ -19,141 +18,222 @@ class Producto {
     }
 }
 
-// Clase Pedido.java
-class Pedido {
-    private Producto producto;
-    private int cantidad;
-    private String nombreCliente;
+class VariedadProducto extends Producto {
+    private String variedad;
 
-    public Pedido(Producto producto, int cantidad, String nombreCliente) {
-        this.producto = producto;
-        this.cantidad = cantidad;
+    public VariedadProducto(String nombre, String variedad, double precio) {
+        super(nombre, precio);
+        this.variedad = variedad;
+    }
+
+    public String getVariedad() {
+        return variedad;
+    }
+}
+
+class Pedido {
+    private String nombreCliente;
+    private List<VariedadProducto> productos = new ArrayList<>();
+    private List<Integer> cantidades = new ArrayList<>();
+    private boolean paraLlevar;
+    private String telefono;
+    private String direccion;
+    private double total;
+
+    public Pedido(String nombreCliente) {
         this.nombreCliente = nombreCliente;
     }
 
-    public double calcularTotal() {
-        return producto.getPrecio() * cantidad;
+    public void agregarProducto(VariedadProducto producto, int cantidad) {
+        productos.add(producto);
+        cantidades.add(cantidad);
+        total += producto.getPrecio() * cantidad;
+    }
+
+    public void setParaLlevar(boolean paraLlevar) {
+        this.paraLlevar = paraLlevar;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public String getNombreCliente() {
+        return nombreCliente;
     }
 
     public void mostrarPedido() {
         System.out.println("Pedido a nombre de: " + nombreCliente);
-        System.out.println("Producto: " + producto.getNombre());
-        System.out.println("Cantidad: " + cantidad);
-        System.out.println("Total a pagar: $" + calcularTotal());
-    }
-}
-
-// Clase Entrega.java
-class Entrega {
-    private String telefono;
-    private String direccion;
-
-    public Entrega(String telefono, String direccion) {
-        this.telefono = telefono;
-        this.direccion = direccion;
-    }
-
-    public void mostrarEntrega() {
-        System.out.println("--- Datos de entrega ---");
-        System.out.println("Teléfono: " + telefono);
-        System.out.println("Dirección: " + direccion);
-    }
-}
-
-// Clase Cupcake (Hereda de Producto)
-class Cupcake extends Producto {
-    private boolean tieneDecoracion;
-
-    public Cupcake(String nombre, double precio, boolean tieneDecoracion) {
-        super(nombre, precio);
-        this.tieneDecoracion = tieneDecoracion;
-    }
-
-    public boolean isTieneDecoracion() {
-        return tieneDecoracion;
-    }
-}
-
-// Clase Main.java
-public class PasteleriaLulu {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        String[][] menu = {
-            {"Torta de chocolate", "Torta de vainilla", "Torta de fresa", "Torta tres leches"},
-            {"Galleta de avena", "Galleta de chispas", "Galleta de mantequilla", "Galleta de coco"},
-            {"Postre de limón", "Postre de maracuyá", "Postre de fresa", "Postre de chocolate"},
-            {"Cupcake de red velvet", "Cupcake de vainilla", "Cupcake de chocolate", "Cupcake arcoiris"},
-            {"Brownie clásico", "Brownie con nuez", "Brownie de chocolate blanco", "Brownie de dulce de leche"}
-        };
-
-        double[][] precios = {
-            {15000, 14000, 14500, 16000},
-            {3000, 3500, 3200, 3600},
-            {5000, 5200, 5100, 5300},
-            {4500, 4400, 4600, 5000},
-            {6000, 6200, 6300, 6500}
-        };
-
-        System.out.println("Bienvenido a la Pastelería Delicia Dulce");
-        System.out.println("Menú disponible:");
-
-        for (int i = 0; i < menu.length; i++) {
-            System.out.println((i + 1) + ". " + obtenerCategoria(i));
+        for (int i = 0; i < productos.size(); i++) {
+            VariedadProducto p = productos.get(i);
+            System.out.println("- " + p.getNombre() + " (" + p.getVariedad() + ") x" + cantidades.get(i) + " = $" + (p.getPrecio() * cantidades.get(i)));
         }
-
-        System.out.print("Seleccione una categoría (1-5): ");
-        int categoria = sc.nextInt() - 1;
-
-        if (categoria >= 0 && categoria < menu.length) {
-            System.out.println("Variaciones disponibles:");
-            for (int j = 0; j < 4; j++) {
-                System.out.println((j + 1) + ". " + menu[categoria][j] + " ($" + precios[categoria][j] + ")");
-            }
-
-            System.out.print("Seleccione el producto (1-4): ");
-            int seleccion = sc.nextInt() - 1;
-
-            System.out.print("Cantidad del producto: ");
-            int cantidad = sc.nextInt();
-            sc.nextLine(); // limpiar buffer
-
-            System.out.print("Nombre del cliente: ");
-            String cliente = sc.nextLine();
-
-            Producto producto = new Producto(menu[categoria][seleccion], precios[categoria][seleccion]);
-            Pedido pedido = new Pedido(producto, cantidad, cliente);
-            pedido.mostrarPedido();
-
-            System.out.print("\n¿Desea que el pedido sea para entrega? (si/no): ");
-            String entrega = sc.nextLine();
-
-            if (entrega.equalsIgnoreCase("si")) {
-                System.out.print("Número de teléfono: ");
-                String tel = sc.nextLine();
-                System.out.print("Dirección de entrega: ");
-                String dir = sc.nextLine();
-
-                Entrega datosEntrega = new Entrega(tel, dir);
-                datosEntrega.mostrarEntrega();
-            } else {
-                System.out.println("Puede recoger su pedido en 30 minutos.");
-            }
+        System.out.println("Total: $" + total);
+        if (paraLlevar) {
+            System.out.println("Para llevar a: " + direccion + " | Tel: " + telefono);
         } else {
-            System.out.println("Opción inválida.");
+            System.out.println("Para recoger en tienda.");
         }
-        
-        sc.close();
+    }
+}
+
+class Utilidades {
+    private static Scanner sc = new Scanner(System.in);
+
+    public static int leerEntero(String mensaje, int min, int max) {
+        int valor = -1;
+        while (true) {
+            System.out.print(mensaje);
+            String input = sc.nextLine();
+            try {
+                valor = Integer.parseInt(input);
+                if (valor < min || valor > max) {
+                    System.out.println("Caracteres inválidos");
+                } else {
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Caracteres inválidos");
+            }
+        }
+        return valor;
     }
 
-    public static String obtenerCategoria(int i) {
-        switch (i) {
-            case 0: return "Tortas";
-            case 1: return "Galletas";
-            case 2: return "Postres";
-            case 3: return "Cupcakes";
-            case 4: return "Brownies";
-            default: return "Desconocido";
+    public static String leerTexto(String mensaje, boolean soloLetras) {
+        while (true) {
+            System.out.print(mensaje);
+            String input = sc.nextLine();
+            if (soloLetras) {
+                if (!input.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+                    System.out.println("Caracteres inválidos");
+                    continue;
+                }
+            } else {
+                if (input.trim().isEmpty()) {
+                    System.out.println("Caracteres inválidos");
+                    continue;
+                }
+            }
+            return input;
+        }
+    }
+
+    public static String leerTelefono() {
+        while (true) {
+            System.out.print("Ingrese número de teléfono (10 dígitos): ");
+            String input = sc.nextLine();
+            if (input.matches("\\d{10}")) {
+                return input;
+            } else {
+                System.out.println("Caracteres inválidos");
+            }
+        }
+    }
+
+    public static String leerDireccion() {
+        System.out.print("Ingrese dirección de entrega: ");
+        return sc.nextLine();
+    }
+
+    public static boolean leerSiNo(String mensaje) {
+        while (true) {
+            System.out.print(mensaje + " (si/no): ");
+            String input = sc.nextLine().trim().toLowerCase();
+            if (input.equals("si")) return true;
+            if (input.equals("no")) return false;
+            System.out.println("Caracteres inválidos");
+        }
+    }
+}
+
+public class PasteleriaLulu {
+    private static String[] categorias = {"Tortas", "Galletas", "Postres", "Cupcakes", "Brownies"};
+    private static String[][] variedades = {
+        {"Chocolate", "Vainilla", "Zanahoria", "Red Velvet"},
+        {"Chispas", "Avena", "Mantequilla", "Coco"},
+        {"Tres Leches", "Flan", "Cheesecake", "Gelatina"},
+        {"Chocolate", "Frambuesa", "Limón", "Oreo"},
+        {"Clásico", "Nuez", "Chocolate Blanco", "Doble Chocolate"}
+    };
+    private static double[][] precios = {
+        {250, 230, 240, 260},
+        {50, 55, 52, 54},
+        {70, 65, 80, 60},
+        {35, 38, 36, 40},
+        {45, 48, 50, 55}
+    };
+
+    private static int clientesAtendidos = 0;
+    private static double totalDia = 0;
+
+    public static void main(String[] args) {
+        System.out.println("Bienvenido a Pastelería Lulu's");
+        boolean otroCliente = true;
+        while (otroCliente) {
+            procesarCliente();
+            otroCliente = Utilidades.leerSiNo("¿Hay otro cliente?");
+        }
+        System.out.println("Clientes atendidos hoy: " + clientesAtendidos);
+        System.out.println("Total vendido hoy: $" + totalDia);
+    }
+
+    private static void procesarCliente() {
+        String nombreCliente = Utilidades.leerTexto("Ingrese el nombre del cliente: ", true);
+        Pedido pedido = new Pedido(nombreCliente);
+
+        boolean agregarOtroProducto = true;
+        while (agregarOtroProducto) {
+            mostrarMenu();
+            int categoria = Utilidades.leerEntero("Seleccione una categoría (1-5): ", 1, 5) - 1;
+            mostrarVariedades(categoria);
+            int variedad = Utilidades.leerEntero("Seleccione una variedad (1-4): ", 1, 4) - 1;
+            int cantidad = Utilidades.leerEntero("Ingrese cantidad (máx 25): ", 1, 25);
+
+            VariedadProducto prod = new VariedadProducto(
+                categorias[categoria],
+                variedades[categoria][variedad],
+                precios[categoria][variedad]
+            );
+            pedido.agregarProducto(prod, cantidad);
+
+            agregarOtroProducto = Utilidades.leerSiNo("¿Desea agregar otro producto?");
+        }
+
+        boolean paraLlevar = Utilidades.leerSiNo("¿El pedido es para llevar?");
+        pedido.setParaLlevar(paraLlevar);
+        if (paraLlevar) {
+            String telefono = Utilidades.leerTelefono();
+            String direccion = Utilidades.leerDireccion();
+            pedido.setTelefono(telefono);
+            pedido.setDireccion(direccion);
+        }
+
+        System.out.println("\nResumen del pedido:");
+        pedido.mostrarPedido();
+
+        totalDia += pedido.getTotal();
+        clientesAtendidos++;
+    }
+
+    private static void mostrarMenu() {
+        System.out.println("\nMenú de la tienda:");
+        for (int i = 0; i < categorias.length; i++) {
+            System.out.println((i + 1) + ". " + categorias[i]);
+        }
+    }
+
+    private static void mostrarVariedades(int categoria) {
+        System.out.println("Variedades de " + categorias[categoria] + ":");
+        for (int i = 0; i < variedades[categoria].length; i++) {
+            System.out.println((i + 1) + ". " + variedades[categoria][i] + " ($" + precios[categoria][i] + ")");
         }
     }
 }
