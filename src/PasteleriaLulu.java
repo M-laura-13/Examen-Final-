@@ -1,4 +1,4 @@
- import java.util.*;
+import java.util.*;
 class Producto {
     protected String nombre;
     protected double precio;

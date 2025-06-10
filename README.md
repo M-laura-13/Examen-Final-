@@ -1,29 +1,46 @@
-1. Nombre del proyecto: Pastelería Lulu’s
+---
 
-2. Integrantes:
+🍰 1. Pastelería Lulu's
 
-Berardo José Márquez Velázquez – 192479 ROL: Diseño – Arrays
-Paula Andrea Echavez Vargas – 192587 ROL: Diseño – Entrada y Salida de Datos
-Keiner Josué Barbosa Calderón – 192502 ROL: Diseño – Lógica
-María Laura Contreras Trillos – 192521 ROL: Diseño – Métodos
+---
+---
 
-3. Descripción del problema y solución propuesta.
+👥 2. Integrantes
 
-El emprendimiento Pastelería lulu's surgió ante la necesidad de organizar eficientemente los
-pedidos personalizados de una pastelería artesanal, así como facilitar la gestión de productos,
-clientes y entregas. 
-Actualmente, el proceso de pedidos es manual y genera errores frecuentes, pérdida de información
-o retrasos, ademas generaba confusiones para saber que persona habia pedido cierto producto generando entregas incorrectas.
+---
 
-Solución: se desarrolló un programa que permite:
+Berardo José Márquez Velázquez – 192479
+ROL: Diseño – Arrays
+Paula Andrea Echavez Vargas – 192587
+ROL: Diseño – Entrada y Salida de Datos
+Keiner Josué Barbosa Calderón – 192502
+ROL: Diseño – Lógica
+María Laura Contreras Trillos – 192521
+ROL: Diseño – Métodos
 
-- Registrar productos.
-- Tomar y especificar el pedido del cliente.
-- Hacer las entregas en la ubicación que ingreso el cliente.
-- Llevar un control constante de inventario.
-- Dar un informe total de ventas que se llevan al dia para una mejor organización.
+---
 
-4. Explicación de clases y métodos principales.
+📝 3. Descripción del Problema y Solución Propuesta
+
+---
+El emprendimiento Pastelería Lulu's surgió ante la necesidad de organizar eficientemente los pedidos personalizados de una pastelería artesanal, así como facilitar la gestión de productos, clientes y entregas.
+
+Actualmente, el proceso de pedidos es manual y genera errores frecuentes, pérdida de información o retrasos. Además, creaba confusiones para saber qué persona había pedido cierto producto, generando entregas incorrectas.
+
+✨ Solución:
+Hemos desarrollado un programa que permite:
+
+Registrar productos.
+Tomar y especificar el pedido del cliente.
+Hacer las entregas en la ubicación que ingresó el cliente.
+Llevar un control constante de inventario.
+Dar un informe total de ventas que se llevan al día para una mejor organización.
+
+---
+
+🚀 4. Explicación de Clases y Métodos Principales
+
+---
 
 | Clase              | Rol                                                        |
 | ------------------ | ---------------------------------------------------------- |
@@ -218,3 +235,65 @@ PasteleriaLulu.java
 
 Y puedes tener todas las clases en este mismo archivo porque ninguna es pública excepto la clase principal.
 ---
+
+UML 
+
+
++-------------------+                +------------------------------+
+|    Producto       |<-------------- |     VariedadProducto         |
++-------------------+    (Hereda)    +------------------------------+
+| - nombre: String  |                | - variedad: String           |
+| - precio: double  |                +------------------------------+
+| - cantidadMaxima  |                | + getVariedad(): String      |
++-------------------+                +------------------------------+
+| + getNombre()     |                            
+| + getPrecio()     |                             
++-------------------+                            
+
+          ▲
+          |
+          |
+          |
++------------------------------------------------+
+|                   Pedido                        |
++------------------------------------------------+
+| - nombreCliente: String                         |
+| - productos: List<VariedadProducto>             |-----> (usa) ------+
+| - cantidades: List<Integer>                     |                   |
+| - paraLlevar: boolean                           |                   |
+| - telefono: String                              |                   |
+| - direccion: String                             |                   |
+| - total: double                                 |                   |
++------------------------------------------------+                    |
+| + agregarProducto(VariedadProducto, int)        |                   |
+| + mostrarPedido()                               |                   |
++------------------------------------------------+                    |
+                                                                      |
+                                                                      |
++------------------------------------------------+                    |
+|                 PasteleriaLulu                   |<-----------------+
++------------------------------------------------+
+| - categorias: String[] (static)                  |
+| - variedades: String[][] (static)                |
+| - precios: double[][] (static)                   |
+| - clientesAtendidos: int (static)                |
+| - totalDia: double (static)                      |
++------------------------------------------------+
+| + main() (static)                                |
+| - procesarCliente() (static)                     |
+| - mostrarMenu() (static)                         |
+| - mostrarVariedades() (static)                   |
++------------------------------------------------+
+           |
+           |
+           | (usa métodos estáticos)
+           |
++-----------------------+
+|     Utilidades        |
++-----------------------+
+| + leerEntero(...)     |
+| + leerTexto(...)      |
+| + leerTelefono()      |
+| + leerDireccion()     |
+| + leerSiNo()          |
++-----------------------+
