@@ -9,14 +9,10 @@
 
 ---
 
-Berardo José Márquez Velázquez – 192479
-ROL: Diseño – Arrays
-Paula Andrea Echavez Vargas – 192587
-ROL: Diseño – Entrada y Salida de Datos
-Keiner Josué Barbosa Calderón – 192502
-ROL: Diseño – Lógica
-María Laura Contreras Trillos – 192521
-ROL: Diseño – Métodos
+Berardo José Márquez Velázquez – 192479  ROL: Diseño – Arrays
+Paula Andrea Echavez Vargas – 192587 ROL: Diseño – Entrada y Salida de Datos
+Keiner Josué Barbosa Calderón – 192502 ROL: Diseño – Lógica
+María Laura Contreras Trillos – 192521 ROL: Diseño – Métodos
 
 ---
 
@@ -237,63 +233,4 @@ Y puedes tener todas las clases en este mismo archivo porque ninguna es pública
 ---
 
 UML 
-
-
-+-------------------+                +------------------------------+
-|    Producto       |<-------------- |     VariedadProducto         |
-+-------------------+    (Hereda)    +------------------------------+
-| - nombre: String  |                | - variedad: String           |
-| - precio: double  |                +------------------------------+
-| - cantidadMaxima  |                | + getVariedad(): String      |
-+-------------------+                +------------------------------+
-| + getNombre()     |                            
-| + getPrecio()     |                             
-+-------------------+                            
-
-          ▲
-          |
-          |
-          |
-+------------------------------------------------+
-|                   Pedido                        |
-+------------------------------------------------+
-| - nombreCliente: String                         |
-| - productos: List<VariedadProducto>             |-----> (usa) ------+
-| - cantidades: List<Integer>                     |                   |
-| - paraLlevar: boolean                           |                   |
-| - telefono: String                              |                   |
-| - direccion: String                             |                   |
-| - total: double                                 |                   |
-+------------------------------------------------+                    |
-| + agregarProducto(VariedadProducto, int)        |                   |
-| + mostrarPedido()                               |                   |
-+------------------------------------------------+                    |
-                                                                      |
-                                                                      |
-+------------------------------------------------+                    |
-|                 PasteleriaLulu                   |<-----------------+
-+------------------------------------------------+
-| - categorias: String[] (static)                  |
-| - variedades: String[][] (static)                |
-| - precios: double[][] (static)                   |
-| - clientesAtendidos: int (static)                |
-| - totalDia: double (static)                      |
-+------------------------------------------------+
-| + main() (static)                                |
-| - procesarCliente() (static)                     |
-| - mostrarMenu() (static)                         |
-| - mostrarVariedades() (static)                   |
-+------------------------------------------------+
-           |
-           |
-           | (usa métodos estáticos)
-           |
-+-----------------------+
-|     Utilidades        |
-+-----------------------+
-| + leerEntero(...)     |
-| + leerTexto(...)      |
-| + leerTelefono()      |
-| + leerDireccion()     |
-| + leerSiNo()          |
-+-----------------------+
+![alt text](image.png)

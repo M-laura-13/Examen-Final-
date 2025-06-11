@@ -34,11 +34,11 @@ public class PasteleriaLuluGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(650, 580);
         frame.setLayout(new BorderLayout());
-        frame.getContentPane().setBackground(new Color(255, 245, 235)); // fondo pastel
+        frame.getContentPane().setBackground(new Color(173, 216, 230)); // fondo pastel
 
         JPanel panelTop = new JPanel(new GridLayout(8, 2, 5, 5));
         panelTop.setBorder(BorderFactory.createTitledBorder("📝 Datos del Pedido"));
-        panelTop.setBackground(new Color(255, 245, 235));
+        panelTop.setBackground(new Color(173, 216, 230));
 
         campoNombre = new JTextField();
         campoCantidad = new JTextField();
@@ -68,7 +68,7 @@ public class PasteleriaLuluGUI {
         panelTop.add(new JLabel());
 
         JPanel panelBotones = new JPanel();
-        panelBotones.setBackground(new Color(255, 235, 245));
+        panelBotones.setBackground(new Color(255, 204, 204));
 
         JButton btnAgregar = new JButton("➕ Agregar Producto");
         JButton btnFinalizar = new JButton("✅ Finalizar Pedido");
@@ -87,7 +87,7 @@ public class PasteleriaLuluGUI {
         labelTotal.setFont(new Font("Arial", Font.BOLD, 16));
         labelTotal.setForeground(new Color(40, 90, 50));
         JPanel totalPanel = new JPanel();
-        totalPanel.setBackground(new Color(255, 245, 235));
+        totalPanel.setBackground(new Color(173, 216, 230));
         totalPanel.add(labelTotal);
 
         frame.add(panelTop, BorderLayout.NORTH);
